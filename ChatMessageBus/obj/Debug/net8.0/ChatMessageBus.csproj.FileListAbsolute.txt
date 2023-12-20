@@ -1,0 +1,12 @@
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\bin\Debug\net8.0\ChatMessageBus.deps.json
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\bin\Debug\net8.0\ChatMessageBus.dll
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\bin\Debug\net8.0\ChatMessageBus.pdb
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.csproj.AssemblyReference.cache
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.AssemblyInfoInputs.cache
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.AssemblyInfo.cs
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.csproj.CoreCompileInputs.cache
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.dll
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\refint\ChatMessageBus.dll
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.pdb
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ref\ChatMessageBus.dll
