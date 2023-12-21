@@ -28,11 +28,17 @@ public class CommentsServices : IComment
 
     public async Task<Comment> GetComment(Guid Id)
     {
+        try{
         return await _chatDbContext.Comments.Where(C=>C.CommentId==Id).FirstOrDefaultAsync();
+        } catch(Exception ex){
+            Console.WriteLine(ex.Message);
+            return new Comment();
+        }
     }
 
     public async Task<List<CommentImageResponseDto>> GetComments(Guid Id)
     {
+        try{
         return await _chatDbContext.Comments.Select(C=>new CommentImageResponseDto(){
             Id=C.CommentId,
             Content=C.Content,
@@ -43,6 +49,10 @@ public class CommentsServices : IComment
                 Image=I.Image
             }).ToList()
         }).Where(p=>p.PostId==Id).ToListAsync();
+        }
+        catch(Exception ex){
+            return new List<CommentImageResponseDto>();
+        }
     }
 
     public async  Task<string> UpdateComment()

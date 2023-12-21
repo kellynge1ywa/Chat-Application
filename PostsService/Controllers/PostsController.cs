@@ -18,7 +18,7 @@ public class PostsController:ControllerBase
         _responseDto=new ResponseDto();
     }
     [HttpGet]
-    // [Authorize(Roles ="User")]
+    [Authorize]
     
     public async Task<ActionResult<List<Post>>> GetAllPosts(){
         var AllPosts= await _IPost.GetAllPosts();
@@ -28,7 +28,7 @@ public class PostsController:ControllerBase
     }
 
     [HttpGet("{Id}")]
-    // [Authorize(Roles ="User")]
+    [Authorize]
     public async Task<ActionResult<Post>> GetOnePost(Guid Id){
         var onePost=await _IPost.GetOnePost(Id);
         if(onePost==null){
@@ -39,7 +39,7 @@ public class PostsController:ControllerBase
         return Ok(_responseDto);
     }
     [HttpPost]
-    [Authorize(Roles ="User")]
+    [Authorize]
     public async Task<ActionResult<string>> CreatePost(AddPostDto NewPost){
         var newPost= _IMapper.Map<Post>(NewPost);
         var response =await _IPost.CreatePost(newPost);
@@ -48,7 +48,7 @@ public class PostsController:ControllerBase
 
     }
     [HttpPut("{Id}")]
-    [Authorize(Roles ="User")]
+    [Authorize]
 
     public async Task<ActionResult<string>> UpdatePost(Guid Id, AddPostDto UptPost){
         var Post= await _IPost.GetOnePost(Id);
@@ -63,6 +63,7 @@ public class PostsController:ControllerBase
         return Ok(_responseDto);
     }
     [HttpDelete("{Id}")]
+    [Authorize(Roles ="User")]
      public async Task<ActionResult<Post>> DeletePost(Guid Id){
         var onePost=await _IPost.GetOnePost(Id);
         if(onePost==null){

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommentsService;
@@ -19,10 +20,12 @@ public class CommentsController:ControllerBase
     }
 
     [HttpPost]
+    
+    [Authorize(Roles ="User")]
     public async Task<ActionResult<ResponseDto>> AddComment(AddCommentDto newComment){
         var comment =_IMapper.Map<Comment>(newComment);
-        var post=await  _IPosts.GetPost(newComment.PostId);
-        if(post.Content==null){
+        var post=await  _IPosts.GetPost(comment.PostId);
+        if(string.IsNullOrWhiteSpace(post.Content)){
             _responseDto.Error="Post not found";
             return NotFound(_responseDto);
         }
@@ -31,6 +34,25 @@ public class CommentsController:ControllerBase
         _responseDto.Result=response;
         return Ok(_responseDto);
 
+    }
+    [HttpGet("{Id}")]
+    [Authorize(Roles ="User")]
+    public async Task<ActionResult<List<CommentImageResponseDto>>> GetAllComments(Guid Id){
+        var comment= await _IComment.GetComments(Id);
+        if(comment== null){
+            _responseDto.Error="Comments for the post not found";
+            return NotFound(_responseDto);
+        }
+        var allComments=_IMapper.Map<List<CommentImageResponseDto>>(comment);
+        _responseDto.Result=allComments;
+        return Ok(_responseDto);
+    }
+    [HttpGet("comment/{Id}")]
+    [Authorize(Roles ="User")]
+    public async Task<ActionResult<Comment>> GetOneComment(Guid Id){
+        var comment= await _IComment.GetComment(Id);
+        _responseDto.Result=comment;
+        return Ok(_responseDto);
     }
 
 }

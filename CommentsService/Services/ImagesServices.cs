@@ -10,11 +10,14 @@ public class ImagesServices : IcommentImage
     {
         _chatDbContext=chatDbContext;
     }
-    public async Task<string> AddImage(Guid Id, CommentImages Images)
+    public async Task<string> AddImage(Guid Id, CommentImages images)
     {
         var comment= _chatDbContext.Comments.Where(k=>k.CommentId==Id).FirstOrDefault();
-        comment.Images.Add(Images);
+        if(comment==null){
+            return "Comment not found";
+        }
+        comment.Images.Add(images);
         await _chatDbContext.SaveChangesAsync();
-        return "Images added";
+        return "Image added";
     }
 }

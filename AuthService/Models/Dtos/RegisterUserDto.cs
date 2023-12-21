@@ -12,7 +12,7 @@ public class RegisterUserDto
     public string PhoneNumber {get;set;} =string.Empty;
     [Required]
     public string Password {get;set;} =string.Empty;
-    public string? Roles {get;set;} ="User";
+    public string ? Roles  {get;set;} ="User";
 
 
 }

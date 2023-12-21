@@ -53,7 +53,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
             //Sending an email
             //Confirm email is sent
              StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append("<img src=\"https://cdn.pixabay.com/photo/2014/07/01/15/40/balloon-381334_640.png\" width=\"800\" height=\"600\">");
+                stringBuilder.Append("<img src=\"https://cdn.pixabay.com/photo/2014/07/01/15/40/balloon-381334_640.png\" width=\"1000\" height=\"500\">");
                 stringBuilder.Append("<h1> Hello " + user.Fullname + "</h1>");
                 stringBuilder.AppendLine("<br/>Welcome to our Chat Application");
 

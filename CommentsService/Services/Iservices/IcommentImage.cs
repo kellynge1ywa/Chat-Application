@@ -2,5 +2,5 @@
 
 public interface IcommentImage
 {
-    Task<string> AddImage(Guid Id,CommentImages Images);
+    Task<string> AddImage(Guid Id,CommentImages images);
 }
