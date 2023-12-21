@@ -10,3 +10,4 @@ D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessa
 D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\refint\ChatMessageBus.dll
 D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.pdb
 D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ref\ChatMessageBus.dll
+D:\Teach2Give\assignments\Microservice\ChatMessageBus\obj\Debug\net8.0\ChatMessageBus.sourcelink.json

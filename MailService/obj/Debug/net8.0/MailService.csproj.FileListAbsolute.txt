@@ -41,3 +41,4 @@ d:\Teach2Give\assignments\Microservice\MailService\obj\Debug\net8.0\ref\MailServ
 d:\Teach2Give\assignments\Microservice\MailService\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 d:\Teach2Give\assignments\Microservice\MailService\bin\Debug\net8.0\MailKit.dll
 d:\Teach2Give\assignments\Microservice\MailService\bin\Debug\net8.0\MimeKit.dll
+D:\Teach2Give\assignments\Microservice\MailService\obj\Debug\net8.0\MailService.sourcelink.json

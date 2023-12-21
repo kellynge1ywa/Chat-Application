@@ -18,7 +18,7 @@ public class PostsController:ControllerBase
         _responseDto=new ResponseDto();
     }
     [HttpGet]
-    [Authorize(Roles ="User")]
+    // [Authorize(Roles ="User")]
     
     public async Task<ActionResult<List<Post>>> GetAllPosts(){
         var AllPosts= await _IPost.GetAllPosts();
@@ -28,7 +28,7 @@ public class PostsController:ControllerBase
     }
 
     [HttpGet("{Id}")]
-    [Authorize(Roles ="User")]
+    // [Authorize(Roles ="User")]
     public async Task<ActionResult<Post>> GetOnePost(Guid Id){
         var onePost=await _IPost.GetOnePost(Id);
         if(onePost==null){

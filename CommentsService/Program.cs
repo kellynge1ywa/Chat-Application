@@ -1,9 +1,35 @@
+using CommentsService;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Add swagger extension
+builder.AddSwaggenGenExtension();
+
+//Add controller services
+builder.Services.AddControllers();
+
+//Add automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Configure base url
+builder.Services.AddHttpClient("Posts",k=>k.BaseAddress=new Uri(builder.Configuration.GetValue<string>("ServiceURL:PostService")));
+
+//
+builder.Services.AddScoped<IComment, CommentsServices>();
+builder.Services.AddScoped<IPosts,PostServices>();
+builder.Services.AddScoped<IcommentImage,ImagesServices>();
+//Configure database
+builder.Services.AddDbContext<ChatDbContext>(options=>{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("myConnections"));
+});
+//Custome services - from extensions folder
+builder.AddAuth();
 
 var app = builder.Build();
 
@@ -16,29 +42,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+
+
+//Add migration class
+app.UseMigrations();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

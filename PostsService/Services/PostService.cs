@@ -36,7 +36,7 @@ public class PostService : Ipost
 
     public async Task<Post> GetOnePost(Guid Id)
     {
-        var singlePost= await _context.Posts.Where(k=>k.Id==Id).FirstOrDefaultAsync();
+        var singlePost= await _context.Posts.Where(k=>k.PostId==Id).FirstOrDefaultAsync();
         if(singlePost==null){
             return new Post();
         }

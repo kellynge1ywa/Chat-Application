@@ -53,13 +53,13 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
             //Sending an email
             //Confirm email is sent
              StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.Append("<img src=\"https://cdn.pixabay.com/photo/2014/07/01/15/40/balloon-381334_640.png\" width=\"1000\" height=\"600\">");
+                stringBuilder.Append("<img src=\"https://cdn.pixabay.com/photo/2014/07/01/15/40/balloon-381334_640.png\" width=\"800\" height=\"600\">");
                 stringBuilder.Append("<h1> Hello " + user.Fullname + "</h1>");
-                stringBuilder.AppendLine("<br/>Welcome to T2G Safaris");
+                stringBuilder.AppendLine("<br/>Welcome to our Chat Application");
 
                 stringBuilder.Append("<br/>");
                 stringBuilder.Append('\n');
-                stringBuilder.Append("<p>Start your First Adventure!!</p>");
+                stringBuilder.Append("<p>Enjoy our amazing features to help you interact with friends and family!!</p>");
 
                 await _MailService.SendEmail(user, stringBuilder.ToString());
 

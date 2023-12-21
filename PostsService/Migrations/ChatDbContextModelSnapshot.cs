@@ -24,7 +24,7 @@ namespace PostsService.Migrations
 
             modelBuilder.Entity("PostsService.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("PostId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -37,7 +37,7 @@ namespace PostsService.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("PostId");
 
                     b.ToTable("Posts");
                 });

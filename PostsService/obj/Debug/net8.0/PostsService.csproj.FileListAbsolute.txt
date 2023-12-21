@@ -152,3 +152,4 @@ D:\Teach2Give\assignments\Microservice\PostsService\obj\Debug\net8.0\refint\Post
 D:\Teach2Give\assignments\Microservice\PostsService\obj\Debug\net8.0\PostsService.pdb
 D:\Teach2Give\assignments\Microservice\PostsService\obj\Debug\net8.0\PostsService.genruntimeconfig.cache
 D:\Teach2Give\assignments\Microservice\PostsService\obj\Debug\net8.0\ref\PostsService.dll
+D:\Teach2Give\assignments\Microservice\PostsService\obj\Debug\net8.0\PostsService.sourcelink.json
