@@ -20,7 +20,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Register post service for dependency injection
 builder.Services.AddScoped<Ipost,PostService>();
+builder.Services.AddScoped<Iuser, UserService>();
 
+//Configure base url
+builder.Services.AddHttpClient("Users",k=>k.BaseAddress=new Uri(builder.Configuration.GetValue<string>("ServiceURL:UserService")));
 
 
 //configure database

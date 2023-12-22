@@ -51,6 +51,7 @@ public class CommentsServices : IComment
         }).Where(p=>p.PostId==Id).ToListAsync();
         }
         catch(Exception ex){
+            Console.WriteLine(ex.Message);
             return new List<CommentImageResponseDto>();
         }
     }

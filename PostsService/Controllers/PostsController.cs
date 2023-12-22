@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +10,14 @@ public class PostsController:ControllerBase
 {
     private readonly IMapper _IMapper;
     private readonly Ipost _IPost;
+    private readonly Iuser _Iuser;
     private readonly ResponseDto _responseDto;
 
-    public PostsController(IMapper mapper, Ipost post)
+    public PostsController(IMapper mapper, Ipost post,Iuser Iuser)
     {
         _IMapper=mapper;
         _IPost=post;
+        _Iuser=Iuser;
         _responseDto=new ResponseDto();
     }
     [HttpGet]
@@ -23,6 +26,22 @@ public class PostsController:ControllerBase
     public async Task<ActionResult<List<Post>>> GetAllPosts(){
         var AllPosts= await _IPost.GetAllPosts();
         _responseDto.Result=AllPosts;
+        return Ok(_responseDto);
+
+    }
+    [HttpGet("Userposts")]
+    [Authorize]
+    
+    public async Task<ActionResult<List<UserPostDto>>> GetAllPostsByUserId(){
+        var UserId=User.Claims.FirstOrDefault(claim=>claim.Type==ClaimTypes.NameIdentifier)?.Value;
+        
+        if(UserId==null){
+            _responseDto.Error="Posts with userId not found";
+            return NotFound(_responseDto);
+
+        }
+        var userPosts= await  _IPost.GetAllPosts();
+        _responseDto.Result=userPosts;
         return Ok(_responseDto);
 
     }
@@ -41,7 +60,15 @@ public class PostsController:ControllerBase
     [HttpPost]
     [Authorize]
     public async Task<ActionResult<string>> CreatePost(AddPostDto NewPost){
+        var Id=User.Claims.FirstOrDefault(claim=>claim.Type==ClaimTypes.NameIdentifier)?.Value;
+
         var newPost= _IMapper.Map<Post>(NewPost);
+        newPost.Id= new Guid(Id);
+        
+        // if(user==null){
+        //     _responseDto.Error="User not found";
+        //     return NotFound(_responseDto);
+        // }
         var response =await _IPost.CreatePost(newPost);
         _responseDto.Result=response;
         return Created("",_responseDto);
@@ -63,7 +90,7 @@ public class PostsController:ControllerBase
         return Ok(_responseDto);
     }
     [HttpDelete("{Id}")]
-    [Authorize(Roles ="User")]
+    [Authorize]
      public async Task<ActionResult<Post>> DeletePost(Guid Id){
         var onePost=await _IPost.GetOnePost(Id);
         if(onePost==null){

@@ -43,6 +43,23 @@ public class PostService : Ipost
         return singlePost;
     }
 
+    public async Task<List<UserPostDto>> GetPostByUser(Guid UserId)
+    {
+        try{
+            return await _context.Posts.Select(U=> new UserPostDto(){
+                PostId=U.PostId,
+                Content=U.Content,
+                Time=U.Time,
+                Image=U.Image,
+                Id=U.Id
+            }).Where(C=>C.Id==UserId).ToListAsync();
+        }
+        catch(Exception ex){
+            Console.WriteLine(ex.Message);
+            return new List<UserPostDto>();
+        }
+    }
+
     public async Task<string> UpdatePost()
     {
         await _context.SaveChangesAsync();

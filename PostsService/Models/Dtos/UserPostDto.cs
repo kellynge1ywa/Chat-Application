@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace PostsService;
 
-namespace PostsService;
-
-public class Post
+public class UserPostDto
 {
-    [Key]
     public Guid PostId {get;set;}
     public string? Content {get;set;}
     public string? Image {get;set;}

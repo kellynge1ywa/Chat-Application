@@ -21,7 +21,7 @@ public class CommentsController:ControllerBase
 
     [HttpPost]
     
-    [Authorize(Roles ="User")]
+    [Authorize]
     public async Task<ActionResult<ResponseDto>> AddComment(AddCommentDto newComment){
         var comment =_IMapper.Map<Comment>(newComment);
         var post=await  _IPosts.GetPost(comment.PostId);
@@ -35,10 +35,10 @@ public class CommentsController:ControllerBase
         return Ok(_responseDto);
 
     }
-    [HttpGet("{Id}")]
-    [Authorize(Roles ="User")]
-    public async Task<ActionResult<List<CommentImageResponseDto>>> GetAllComments(Guid Id){
-        var comment= await _IComment.GetComments(Id);
+    [HttpGet("{PostId}")]
+    [Authorize]
+    public async Task<ActionResult<List<CommentImageResponseDto>>> GetAllComments(Guid PostId){
+        var comment= await _IComment.GetComments(PostId);
         if(comment== null){
             _responseDto.Error="Comments for the post not found";
             return NotFound(_responseDto);
@@ -48,11 +48,38 @@ public class CommentsController:ControllerBase
         return Ok(_responseDto);
     }
     [HttpGet("comment/{Id}")]
-    [Authorize(Roles ="User")]
+    [Authorize]
     public async Task<ActionResult<Comment>> GetOneComment(Guid Id){
         var comment= await _IComment.GetComment(Id);
         _responseDto.Result=comment;
         return Ok(_responseDto);
     }
+    [HttpPut("{Id}")]
+    [Authorize]
+    public async Task<ActionResult<ResponseDto>> UpdateComment(Guid Id,AddCommentDto updateComment){
+        var Comment= await _IComment.GetComment(Id);
+        if(Comment== null){
+            _responseDto.Error="Comment not found";
+            return NotFound(_responseDto);
+        }
+        _IMapper.Map(updateComment,Comment);
+        var response= await _IComment.UpdateComment();
+        _responseDto.Result=response;
+        return Ok(_responseDto);
+    }
+    [HttpDelete("{Id}")]
+    [Authorize]
+    public async Task<ActionResult<ResponseDto>> DeleteComment(Guid Id){
+        var Comment= await _IComment.GetComment(Id);
+        if(Comment== null){
+            _responseDto.Error="Comment not found";
+            return NotFound(_responseDto);
+        }
+        var deleted= await _IComment.DeleteComment(Comment);
+        _responseDto.Result=deleted;
+        return Ok(_responseDto);
+
+    }
+
 
 }
